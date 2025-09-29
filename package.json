@@ -1,7 +1,7 @@
 {
   "name": "@ericglau/erc7201-mcp",
   "version": "0.0.1-alpha.0",
-  "description": "ERC-7201 Namespaced Storage Location MCP Server",
+  "description": "ERC-7201 Namespaced Storage Layout MCP Server",
   "license": "AGPL-3.0-only",
   "repository": "https://github.com/ericglau/erc7201-mcp",
   "main": "dist/index.js",
