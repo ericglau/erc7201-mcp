@@ -7,7 +7,7 @@ function registerCalculateERC7201Namespace(server: McpServer): RegisteredTool {
     'erc7201-compute-storage-location',
     'Computes the ERC-7201 namespaced storage location for a given namespace id.',
     {
-      namespaceId: z.string().describe('The namespace id'),
+      namespaceId: z.string().describe('The namespace id, without "erc7201:" prefix'),
     },
     async ({
       namespaceId
@@ -29,8 +29,8 @@ function registerValidateERC7201Namespace(server: McpServer): RegisteredTool {
     'erc7201-validate-storage-location',
     'Validates the ERC-7201 namespaced storage location for a given namespace id. Returns true if the namespace id results in the storage location, false otherwise.',
     {
-      namespaceId: z.string().describe('The namespace id'),
-      storageLocation: z.string().describe('The storage location to validate, in hex format with 0x prefix'),
+      namespaceId: z.string().describe('The namespace id, without "erc7201:" prefix'),
+      storageLocation: z.string().describe('The storage location to validate, as a lowercase hex string with 0x prefix'),
     },
     async ({
       namespaceId,
