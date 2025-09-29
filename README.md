@@ -1,5 +1,7 @@
 # ERC-7201 Namespaced Storage Layout MCP Server
 
+[![NPM Package](https://img.shields.io/npm/v/@ericglau/erc7201-mcp)](https://www.npmjs.com/package/@ericglau/erc7201-mcp)
+
 A Model Context Protocol (MCP) server that allows AI agents to calculate and validate storage locations for [ERC-7201](https://eips.ethereum.org/EIPS/eip-7201) namespaced storage layouts.
 
 ## Installation
