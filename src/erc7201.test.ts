@@ -13,21 +13,21 @@ test('calculateERC7201StorageLocation is deterministic', t => {
 	t.is(result, computeERC7201StorageLocation('example.main'));
 });
 
-test('calculateERC7201StorageLocation handles empty string', t => {
+test('calculateERC7201StorageLocation accepts empty string', t => {
 	const result = computeERC7201StorageLocation('');
 	
 	t.true(result.startsWith('0x'));
 	t.is(result.length, 66);
 });
 
-test('calculateERC7201StorageLocation handles special characters', t => {
+test('calculateERC7201StorageLocation accepts special characters', t => {
 	const result = computeERC7201StorageLocation('test.namespace!@#$%^&*()');
 	
 	t.true(result.startsWith('0x'));
 	t.is(result.length, 66);
 });
 
-test('calculateERC7201StorageLocation handles unicode characters', t => {
+test('calculateERC7201StorageLocation accepts unicode characters', t => {
 	const result = computeERC7201StorageLocation('test.namespace.🚀');
 	
 	t.true(result.startsWith('0x'));
@@ -44,7 +44,7 @@ test('calculateERC7201StorageLocation produces different results for different i
 	t.not(result2, result3);
 });
 
-test('calculateERC7201StorageLocation handles long strings', t => {
+test('calculateERC7201StorageLocation accepts long strings', t => {
 	const longString = 'a'.repeat(1000);
 	const result = computeERC7201StorageLocation(longString);
 	
@@ -77,7 +77,7 @@ test('calculateERC7201StorageLocation returns valid hex format', t => {
 	t.true(hexPattern.test(result), `Result should match hex pattern, got: ${result}`);
 });
 
-test('calculateERC7201StorageLocation case sensitivity', t => {
+test('calculateERC7201StorageLocation is case sensitive', t => {
 	const result1 = computeERC7201StorageLocation('Example.Main');
 	const result2 = computeERC7201StorageLocation('example.main');
 	const result3 = computeERC7201StorageLocation('EXAMPLE.MAIN');
@@ -88,7 +88,7 @@ test('calculateERC7201StorageLocation case sensitivity', t => {
 	t.not(result2, result3);
 });
 
-test('calculateERC7201StorageLocation whitespace handling', t => {
+test('calculateERC7201StorageLocation includes whitespace', t => {
 	const result1 = computeERC7201StorageLocation('test.namespace');
 	const result2 = computeERC7201StorageLocation(' test.namespace');
 	const result3 = computeERC7201StorageLocation('test.namespace ');
@@ -110,31 +110,31 @@ test('validateERC7201StorageLocation corresponds to computeERC7201StorageLocatio
 	t.true(validateERC7201StorageLocation(namespace, storageLocation));
 });
 
-test('validateERC7201StorageLocation returns true for correct pairs', t => {
+test('validateERC7201StorageLocation returns true', t => {
 	const namespace = 'example.main';
 	const storageLocation = '0x183a6125c38840424c4a85fa12bab2ab606c4b6d0e7cc73c0c06ba5300eab500';
 	
 	t.true(validateERC7201StorageLocation(namespace, storageLocation));
 });
 
-test('validateERC7201StorageLocation returns false for incorrect pairs', t => {
+test('validateERC7201StorageLocation returns false', t => {
 	const namespace = 'example.main';
 	const wrongStorageLocation = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcd00';
 	
 	t.false(validateERC7201StorageLocation(namespace, wrongStorageLocation));
 });
 
-test('validateERC7201StorageLocation handles different namespaces', t => {
+test('validateERC7201StorageLocation accepts different namespaces', t => {
 	const namespace1 = 'test.namespace1';
 	const namespace2 = 'test.namespace2';
 	const storageLocation1 = computeERC7201StorageLocation(namespace1);
 	const storageLocation2 = computeERC7201StorageLocation(namespace2);
 	
-	// Correct pairs should validate
+	// Correct pairs should be valid
 	t.true(validateERC7201StorageLocation(namespace1, storageLocation1));
 	t.true(validateERC7201StorageLocation(namespace2, storageLocation2));
 	
-	// Cross pairs should not validate
+	// Cross pairs should not be valid
 	t.false(validateERC7201StorageLocation(namespace1, storageLocation2));
 	t.false(validateERC7201StorageLocation(namespace2, storageLocation1));
 });
@@ -143,10 +143,10 @@ test('validateERC7201StorageLocation is case sensitive', t => {
 	const namespace = 'Example.Main';
 	const storageLocation = computeERC7201StorageLocation(namespace);
 	
-	// Correct case should validate
+	// Correct casing should be valid
 	t.true(validateERC7201StorageLocation(namespace, storageLocation));
 	
-	// Different case should not validate
+	// Different casing should not be valid
 	t.false(validateERC7201StorageLocation('example.main', storageLocation));
 	t.false(validateERC7201StorageLocation('EXAMPLE.MAIN', storageLocation));
 });
