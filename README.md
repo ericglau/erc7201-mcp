@@ -12,7 +12,7 @@ Configure your MCP client to invoke `npx -y @ericglau/erc7201-mcp` using stdio.
 ```
 {
   "mcpServers": {
-    "erc7201-namespaced-storage-layout": {
+    "erc7201": {
       "command": "npx",
       "args": [
         "-y",
@@ -25,14 +25,14 @@ Configure your MCP client to invoke `npx -y @ericglau/erc7201-mcp` using stdio.
 
 #### Claude Code
 ```
-claude mcp add erc7201-namespaced-storage-layout -- npx -y @ericglau/erc7201-mcp
+claude mcp add erc7201 -- npx -y @ericglau/erc7201-mcp
 ```
 
 #### VS Code (GitHub Copilot)
 ```
 {
   "servers": {
-    "erc7201-namespaced-storage-layout": {
+    "erc7201": {
       "type": "stdio",
       "command": "npx",
       "args": [
