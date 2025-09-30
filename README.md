@@ -48,5 +48,5 @@ claude mcp add erc7201 -- npx -y @ericglau/erc7201-mcp
 
 ## Tools
 
-- `erc7201-compute-storage-location`
-- `erc7201-validate-storage-location`
+- `erc7201-compute-storage-location` - Computes the ERC-7201 namespaced storage location for a given namespace id.
+- `erc7201-validate-storage-location` - Validates whether a given namespace id results in the given storage location according to ERC-7201.

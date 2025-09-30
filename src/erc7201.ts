@@ -7,19 +7,14 @@ import { hexToBytes, toHex, utf8ToBytes } from 'ethereum-cryptography/utils';
 export function computeERC7201StorageLocation(id: string): string {
 	const firstHash = keccak256(utf8ToBytes(id));
 	const minusOne = BigInt('0x' + toHex(firstHash)) - 1n;
-	const hexString = minusOne.toString(16);
-	// Ensure even length for hexToBytes
-	const evenLengthHex = hexString.length % 2 === 0 ? hexString : '0' + hexString;
-	const minusOneBytes = hexToBytes(evenLengthHex);
+	const minusOneBytes = hexToBytes(minusOne.toString(16).padStart(64, '0'));
 
 	const secondHash = keccak256(minusOneBytes);
 	
 	const mask = BigInt('0xff');
 	const masked = BigInt('0x' + toHex(secondHash)) & ~mask;
 
-	const padded = masked.toString(16).padStart(64, '0');
-
-	return '0x' + padded;
+	return '0x' + masked.toString(16).padStart(64, '0');
 }
 
 /**
